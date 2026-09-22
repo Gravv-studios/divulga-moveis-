@@ -279,3 +279,6 @@
     }
   }
 }
+
+/* Referências comerciais confirmadas na fonte. */
+.product-code { font-size: 16px; line-height: 1.5; font-weight: 600; color: #244634; margin: 10px 0 14px; overflow-wrap: anywhere; }

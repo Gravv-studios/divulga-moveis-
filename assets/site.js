@@ -27,7 +27,7 @@
   function updateLink() {
     const lines = cart.map(item => {
       const product = byId.get(item.id);
-      return `${item.quantity} × ${product.name}\nLinha: ${product.line}`;
+      return `${item.quantity} × ${product.name}\nLinha: ${product.line}${product.code ? `\nCódigo: ${product.code}` : ''}`;
     });
     const note = $('#quote-note').value.trim();
     const text = ['Olá! Gostaria de um orçamento com a Divulga Móveis.', ...lines, note ? 'Observações: ' + note : '', 'Por favor, informe valores, acabamentos disponíveis e condições de entrega.'].filter(Boolean).join('\n\n');
@@ -45,7 +45,7 @@
     $('#quote-summary').hidden = !cart.length;
     $('#quote-items').innerHTML = cart.length ? cart.map(item => {
       const p = byId.get(item.id);
-      return `<article class="quote-item">${p.image ? `<img src="${base}assets/img/${escape(p.image)}" alt="${escape(p.name)}">` : '<span class="no-photo">Sem foto</span>'}<div><h3><a href="${base}produto/${escape(p.slug)}/index.html">${escape(p.name)}</a></h3><p>${escape(p.line)}</p><div class="quantity"><button data-decrease="${escape(p.id)}" aria-label="Diminuir quantidade de ${escape(p.name)}" ${item.quantity === 1 ? 'disabled' : ''}>${tinyIcon('minus')}</button><span aria-label="Quantidade">${item.quantity}</span><button data-increase="${escape(p.id)}" aria-label="Aumentar quantidade de ${escape(p.name)}" ${item.quantity === 99 ? 'disabled' : ''}>${tinyIcon('plus')}</button></div></div><button class="quote-remove" data-remove="${escape(p.id)}" aria-label="Remover ${escape(p.name)} do orçamento">${tinyIcon('close')}</button></article>`;
+      return `<article class="quote-item">${p.image ? `<img src="${base}assets/img/${escape(p.image)}" alt="${escape(p.name)}">` : '<span class="no-photo">Sem foto</span>'}<div><h3><a href="${base}produto/${escape(p.slug)}/index.html">${escape(p.name)}</a></h3><p>${escape(p.line)}</p>${p.code ? `<p class="product-code">Código: ${escape(p.code)}</p>` : ''}<div class="quantity"><button data-decrease="${escape(p.id)}" aria-label="Diminuir quantidade de ${escape(p.name)}" ${item.quantity === 1 ? 'disabled' : ''}>${tinyIcon('minus')}</button><span aria-label="Quantidade">${item.quantity}</span><button data-increase="${escape(p.id)}" aria-label="Aumentar quantidade de ${escape(p.name)}" ${item.quantity === 99 ? 'disabled' : ''}>${tinyIcon('plus')}</button></div></div><button class="quote-remove" data-remove="${escape(p.id)}" aria-label="Remover ${escape(p.name)} do orçamento">${tinyIcon('close')}</button></article>`;
     }).join('') : `<div class="quote-empty">${tinyIcon('bag')}<h3>Seu espaço começa<br>com uma escolha.</h3><p>Adicione os móveis que você gostou e peça um orçamento com todos os itens.</p><a href="${base}catalogo.html" class="button primary">Explorar os móveis</a></div>`;
     updateLink();
   }
