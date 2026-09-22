@@ -282,3 +282,12 @@
 
 /* Referências comerciais confirmadas na fonte. */
 .product-code { font-size: 16px; line-height: 1.5; font-weight: 600; color: #244634; margin: 10px 0 14px; overflow-wrap: anywhere; }
+
+/* Contato direto em todas as fichas e cartões, com alvos amplos. */
+.product-contact-actions{display:grid;gap:10px;margin-top:18px}
+.product-contact-actions a{display:flex;align-items:center;justify-content:center;min-height:48px;padding:12px 10px;border:1px solid #244634;border-radius:5px;font-size:16px;font-weight:650;text-align:center;line-height:1.4}
+.contact-whatsapp{background:#244634;color:#fff}.contact-email-button{background:#fff;color:#244634}
+.product-contact-actions a:hover{box-shadow:0 0 0 2px #79996c}.product-contact-actions a:focus-visible,.floating-whatsapp:focus-visible{outline:3px solid #b3d16b;outline-offset:4px}
+.floating-whatsapp{position:fixed;right:24px;bottom:24px;bottom:calc(24px + env(safe-area-inset-bottom));z-index:90;display:flex;align-items:center;gap:9px;background:#137b3d;color:#fff;border:2px solid #fff;border-radius:40px;padding:14px 18px;box-shadow:0 5px 22px #0003;font-size:17px;font-weight:700}
+.floating-whatsapp svg{width:30px;height:30px}.site-footer{padding-bottom:100px}.quote-summary #send-email{margin-top:12px}.toast{bottom:105px}
+@media(max-width:600px){.floating-whatsapp{right:16px;bottom:16px;bottom:calc(16px + env(safe-area-inset-bottom));padding:13px;border-radius:50%}.floating-whatsapp span{position:absolute;width:1px;height:1px;overflow:hidden;clip-path:inset(50%)}.product-contact-actions a{font-size:15px}}

@@ -27,11 +27,12 @@
   function updateLink() {
     const lines = cart.map(item => {
       const product = byId.get(item.id);
-      return `${item.quantity} × ${product.name}\nLinha: ${product.line}${product.code ? `\nCódigo: ${product.code}` : ''}`;
+      return `${item.quantity} × ${product.name}\nLinha: ${product.line}${product.code ? `\nCódigo: ${product.code}` : ''}\nDescrição: ${product.description}\nProduto: ${product.product_url}${product.image_url ? `\nImagem: ${product.image_url}` : ''}`;
     });
     const note = $('#quote-note').value.trim();
     const text = ['Olá! Gostaria de um orçamento com a Divulga Móveis.', ...lines, note ? 'Observações: ' + note : '', 'Por favor, informe valores, acabamentos disponíveis e condições de entrega.'].filter(Boolean).join('\n\n');
     $('#send-quote').href = 'https://wa.me/556133573561?text=' + encodeURIComponent(text);
+    $('#send-email').href = 'mailto:divulgamoveis@gmail.com?subject=' + encodeURIComponent('Solicitação de orçamento — Divulga Móveis') + '&body=' + encodeURIComponent(text);
   }
   function renderCart() {
     const total = cart.reduce((n,x) => n + x.quantity, 0);
