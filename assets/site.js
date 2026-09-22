@@ -121,7 +121,7 @@
   function updateLines() {
     const previous = line.value;
     const available = category.value ? [...new Set(cards.filter(x => x.dataset.category === category.value).map(x => x.dataset.line))].sort((a,b) => a.localeCompare(b,'pt-BR')) : allLines;
-    line.innerHTML = '<option value="">Todas as linhas</option>' + available.map(x => `<option>${escape(x)}</option>`).join('');
+    line.innerHTML = '<option value="">Todos os tipos</option>' + available.map(x => `<option>${escape(x)}</option>`).join('');
     if (available.includes(previous)) line.value = previous;
   }
   function filter(updateURL = true) {
