@@ -109,6 +109,34 @@
   nav.addEventListener('click', event => { if (event.target.closest('a')) closeMenu(); });
   document.addEventListener('keydown', event => { if (event.key === 'Escape' && nav.classList.contains('is-open')) { closeMenu(); menu.focus(); } });
   document.addEventListener('click', event => { if (!event.target.closest('.site-header')) closeMenu(); });
+  const departmentMenus = $$('.department-menu');
+  departmentMenus.forEach(item => {
+    let closeTimer;
+    item.addEventListener('pointerenter', event => {
+      if (event.pointerType !== 'mouse') return;
+      clearTimeout(closeTimer);
+      departmentMenus.forEach(other => { if (other !== item) other.open = false; });
+      item.open = true;
+    });
+    item.addEventListener('pointerleave', event => {
+      if (event.pointerType !== 'mouse') return;
+      closeTimer = setTimeout(() => {
+        if (!item.contains(document.activeElement)) item.open = false;
+      }, 180);
+    });
+    item.addEventListener('focusout', () => {
+      closeTimer = setTimeout(() => {
+        if (!item.matches(':hover') && !item.contains(document.activeElement)) item.open = false;
+      }, 180);
+    });
+  });
+  departmentMenus.forEach(item => item.addEventListener('toggle', () => {
+    if(item.open) departmentMenus.forEach(other => {if(other !== item) other.open=false;});
+  }));
+  document.addEventListener('click', e => {if(!e.target.closest('.department-menu')) departmentMenus.forEach(item=>item.open=false);});
+  document.addEventListener('keydown', e => {if(e.key==='Escape') departmentMenus.forEach(item=>item.open=false);});
+  const categoryPanel=$('.catalog-sidebar details');
+  if(categoryPanel && matchMedia('(max-width:760px)').matches) categoryPanel.open=false;
   const catalog = $('[data-catalog]');
   if (!catalog) return;
   const search = $('#busca'), category = $('#category-filter'), line = $('#line-filter');
