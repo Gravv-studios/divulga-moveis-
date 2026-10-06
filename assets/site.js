@@ -110,6 +110,29 @@
   document.addEventListener('keydown', event => { if (event.key === 'Escape' && nav.classList.contains('is-open')) { closeMenu(); menu.focus(); } });
   document.addEventListener('click', event => { if (!event.target.closest('.site-header')) closeMenu(); });
   const departmentMenus = $$('.department-menu');
+  const departments = $('.department-nav');
+  if (departments) {
+    const list = $('.container', departments);
+    list.id = 'department-list';
+    const toggle = document.createElement('button');
+    toggle.className = 'mobile-departments-toggle';
+    toggle.type = 'button';
+    toggle.setAttribute('aria-controls', list.id);
+    toggle.setAttribute('aria-expanded', 'false');
+    toggle.textContent = '☰  Todas as categorias';
+    departments.prepend(toggle);
+    departments.classList.add('has-mobile-toggle');
+    toggle.addEventListener('click', () => {
+      const open = departments.classList.toggle('mobile-open');
+      toggle.setAttribute('aria-expanded', String(open));
+    });
+    document.addEventListener('keydown', event => {
+      if(event.key === 'Escape') {
+        departments.classList.remove('mobile-open');
+        toggle.setAttribute('aria-expanded','false');
+      }
+    });
+  }
   departmentMenus.forEach(item => {
     let closeTimer;
     item.addEventListener('pointerenter', event => {

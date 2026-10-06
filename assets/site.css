@@ -422,3 +422,33 @@ body .product-view{font-size:15px;opacity:1;transform:none;bottom:12px;right:12p
 .department-menu>summary{font-size:13px}
 @media(max-width:760px){.department-nav>.container{grid-template-columns:repeat(3,minmax(0,1fr))}.department-menu>summary{font-size:12px}.department-options{max-height:50vh}}
 @media(max-width:760px){.department-nav>.container{grid-auto-flow:row;grid-template-rows:auto;grid-template-columns:repeat(3,minmax(0,1fr))}.department-menu{grid-column:auto;grid-row:auto}}
+/* Compact mobile storefront, full information available by touch. */
+.mobile-departments-toggle{display:none}
+@media(max-width:760px){
+ html{scroll-padding-top:180px}
+ .topbar{font-size:11px}.topbar .container{padding-block:6px}
+ .header-inner{width:calc(100% - 24px);display:grid;grid-template-columns:1fr auto;gap:10px;padding:10px 0}
+ .header-inner .brand,.header-inner .brand img{width:130px;max-width:130px;min-width:0}
+ .header-actions{margin:0;gap:5px}.quote-trigger{font-size:13px;min-height:44px;padding:8px;gap:6px}.quote-trigger>.icon{display:none}.quote-count{width:21px;height:21px;font-size:12px}.menu-toggle{width:34px;min-width:34px}.menu-toggle>.icon{width:22px;height:22px}
+ .header-search{grid-column:1/-1;grid-row:2;min-width:0;width:100%;order:initial}.header-search input{padding:11px;font-size:16px}.header-search button{font-size:14px;padding:10px 15px}
+ .header-inner .main-nav{gap:0}.main-nav.is-open{max-height:55vh;overflow:auto}
+ .mobile-departments-toggle{display:flex;align-items:center;width:100%;min-height:44px;padding:12px 16px;border:0;background:#244634;color:white;font-size:15px;font-weight:600;text-align:left}
+ .department-nav.has-mobile-toggle>.container{display:none}
+ .department-nav.has-mobile-toggle.mobile-open>.container{display:block;max-height:55vh;overflow-y:auto;padding:0 12px 12px}
+ .department-nav>.container{display:block;grid-auto-flow:row}
+ .department-menu>summary{text-align:left;font-size:15px;text-transform:none;min-height:48px;padding:14px 8px;border-top:1px solid #ffffff30}
+ .department-options{position:static;max-height:none;box-shadow:none;border:0;margin-bottom:8px;padding:4px;border-radius:4px}
+ .department-nav .department-options a{font-size:15px;min-height:44px;padding:12px}
+ .hero{width:calc(100% - 24px);margin-top:12px;min-height:0;display:flex;flex-direction:column}
+ .hero-copy{padding:24px}.hero h1{font-size:40px;line-height:1.05;margin:12px 0 16px}.hero-copy>.eyebrow{font-size:10px}.hero-copy>p{font-size:15px;margin-bottom:18px}.hero .button{min-height:46px;font-size:14px}.hero-foot{padding-top:18px;font-size:11px}
+ .hero-image{height:180px;min-height:180px}.hero-image-caption{font-size:9px;bottom:14px;left:18px;right:18px}
+ .store-shortcuts{display:grid;grid-template-columns:1fr 1fr;gap:8px}.store-shortcuts a{font-size:13px;line-height:1.4;padding:12px;display:flex;align-items:center;min-height:48px}
+ .store-shelf-heading{gap:12px;margin-bottom:16px}.store-shelf-heading h2{font-size:22px}.store-shelf-heading a{font-size:13px}
+ .store-shelf .product-grid{grid-template-columns:1fr;gap:20px}.store-shelf .product-image{aspect-ratio:auto;height:240px}.store-shelf .product-image img{height:100%;object-fit:contain}.store-shelf .product-info{padding:16px}.store-shelf .product-info h3{font-size:17px;line-height:1.45}
+ .catalog-intro .catalog-cover{display:none}.catalog-title h1{font-size:32px}.catalog-title p{font-size:15px}.catalog-intro .breadcrumb{padding-bottom:18px}.catalog-heading{padding:20px}
+ .catalog-sidebar{width:calc(100vw - 104px);max-width:290px;bottom:14px}.catalog-sidebar summary{font-size:14px;padding:13px}
+ .product-contact-actions a{min-height:42px;font-size:14px}
+ .floating-whatsapp{width:52px!important;height:52px!important;min-width:52px!important;padding:10px!important;right:14px!important;bottom:14px!important}.floating-whatsapp span{display:none!important}.floating-whatsapp svg{width:32px!important;height:32px!important}
+ .store-shelves{padding-bottom:30px}
+}
+@media(max-width:760px){.hero-copy{min-height:0;height:auto}.hero-foot{display:flex}.header-inner .main-nav.is-open{width:100%;left:0;right:0}}
