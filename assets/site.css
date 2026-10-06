@@ -452,3 +452,17 @@ body .product-view{font-size:15px;opacity:1;transform:none;bottom:12px;right:12p
  .store-shelves{padding-bottom:30px}
 }
 @media(max-width:760px){.hero-copy{min-height:0;height:auto}.hero-foot{display:flex}.header-inner .main-nav.is-open{width:100%;left:0;right:0}}
+/* New hero: open typography, warm neutral surface and a large photo. */
+.welcome-hero{display:grid;grid-template-columns:1fr 1.12fr;gap:32px;align-items:stretch;padding-top:32px;padding-bottom:24px}
+.welcome-copy{padding:44px 12px 36px 0;display:flex;flex-direction:column;align-items:flex-start;justify-content:center}
+.welcome-kicker{display:flex;align-items:center;gap:9px;font-size:11px;font-weight:600;letter-spacing:.13em;color:#476048}.welcome-kicker i{width:7px;height:7px;border-radius:50%;background:#6d8959}
+.welcome-copy h1{font-size:clamp(40px,4.7vw,66px);font-weight:500;letter-spacing:-.055em;line-height:1.08;color:#244634;margin:25px 0 22px}
+.welcome-copy h1 em{font-family:Georgia,serif;font-weight:400;color:#65814e}
+.welcome-copy>p{font-size:17px;line-height:1.65;color:#677066;max-width:405px;margin:0 0 27px}
+.welcome-actions{display:flex;flex-direction:column;align-items:flex-start;gap:18px}.welcome-actions .button{border-radius:5px;font-size:15px;padding:16px 22px;min-height:50px}.welcome-help{font-size:13px;color:#425a45;display:flex;align-items:center;gap:8px}.welcome-help .icon{width:15px;height:15px}
+.welcome-note{display:flex;gap:20px;margin-top:35px;padding-top:18px;border-top:1px solid #dde3d8;width:100%;max-width:400px;color:#727c6e;font-size:12px}
+.welcome-visual{position:relative;border-radius:14px;overflow:hidden;min-height:460px;background:#eeeae2}
+.welcome-visual>img{width:100%;height:100%;position:absolute;object-fit:cover;object-position:58% center}
+.welcome-visual:after{content:'';position:absolute;inset:55% 0 0;background:linear-gradient(transparent,#14241799);pointer-events:none}
+.welcome-caption{position:absolute;bottom:26px;left:26px;right:26px;z-index:1;color:#fff;display:flex;align-items:center;justify-content:space-between;font-size:16px;line-height:1.5}.welcome-caption strong{font-weight:500}.welcome-caption>a{display:grid;place-items:center;width:44px;height:44px;border:1px solid #ffffff88;border-radius:50%;color:white}
+@media(max-width:760px){.welcome-hero{grid-template-columns:1fr;gap:20px;padding-top:25px;padding-bottom:8px;width:calc(100% - 32px)}.welcome-copy{padding:0}.welcome-kicker{font-size:9px;letter-spacing:.11em}.welcome-copy h1{font-size:40px;line-height:1.1;margin:17px 0 16px}.welcome-copy>p{font-size:15px;line-height:1.6;margin-bottom:20px;max-width:340px}.welcome-actions{gap:13px;width:100%}.welcome-actions .button{width:100%;justify-content:space-between;font-size:15px;min-height:48px;padding:13px 18px}.welcome-help{font-size:13px;min-height:32px}.welcome-note{margin-top:16px;padding-top:14px;gap:22px;font-size:11px}.welcome-visual{height:225px;min-height:225px;border-radius:10px}.welcome-visual>img{object-position:center 52%}.welcome-caption{left:18px;right:18px;bottom:16px;font-size:13px}.welcome-caption>a{width:38px;height:38px}}
