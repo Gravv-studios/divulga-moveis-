@@ -164,14 +164,16 @@
   if (!catalog) return;
   const search = $('#busca'), category = $('#category-filter'), line = $('#line-filter');
   const cards = $$('[data-product-card]', catalog);
-  const allLines = [...new Set(cards.map(card => card.dataset.line))].sort((a,b) => a.localeCompare(b,'pt-BR'));
+  const typePriority=['Cadeiras giratórias','Cadeiras fixas / interlocutoras','Mesas retas para atendimento','Mesas em L e estações de trabalho','Mesas de reunião','Balcões para recepção','Mesas auxiliares','Mesas para telemarketing'];
+  const sortTypes=(a,b)=>{const rank=x=>x==='Escrivaninhas'?100:typePriority.includes(x)?typePriority.indexOf(x):50;return rank(a)-rank(b)||a.localeCompare(b,'pt-BR');};
+  const allLines = [...new Set(cards.map(card => card.dataset.line))].sort(sortTypes);
   let visibleCount = 16;
   const params = new URLSearchParams(location.search);
   search.value = params.get('q') || '';
   if (!catalog.dataset.fixedCategory && [...category.options].some(x => x.value === params.get('categoria'))) category.value = params.get('categoria');
   function updateLines() {
     const previous = line.value;
-    const available = category.value ? [...new Set(cards.filter(x => x.dataset.category === category.value).map(x => x.dataset.line))].sort((a,b) => a.localeCompare(b,'pt-BR')) : allLines;
+    const available = category.value ? [...new Set(cards.filter(x => x.dataset.category === category.value).map(x => x.dataset.line))].sort(sortTypes) : allLines;
     line.innerHTML = '<option value="">Todos os tipos</option>' + available.map(x => `<option>${escape(x)}</option>`).join('');
     if (available.includes(previous)) line.value = previous;
   }
