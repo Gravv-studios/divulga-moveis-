@@ -1,0 +1,115 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex, nofollow">
+<title>Scan → AR | Estúdio 3D</title>
+<meta name="theme-color" content="#244634">
+<script type="module" src="model-viewer.min.js"></script>
+<style>
+*{box-sizing:border-box}
+body{margin:0;font-family:system-ui,-apple-system,"Segoe UI",Roboto,sans-serif;background:#f4f2ec;color:#1d2a22;line-height:1.45}
+header{background:#244634;color:#fff;padding:14px 18px;display:flex;gap:12px;align-items:center}
+header strong{flex:1;font-size:17px}header a{color:#fff;opacity:.85;text-decoration:none;font-size:14px}
+main{max-width:1200px;margin:0 auto;padding:16px}
+h1{font-size:22px;margin:0 0 4px}.sub{margin:0 0 14px;color:#4f5d54}
+.grid{display:grid;gap:16px}@media(min-width:960px){.grid{grid-template-columns:1fr 360px}}
+#view{position:relative;height:min(68vh,620px);border-radius:14px;overflow:hidden;background:#e9e6df}
+#view canvas{display:block;width:100%;height:100%}
+.medidas{display:flex;flex-wrap:wrap;gap:8px 16px;font-size:14px;margin:10px 2px}
+.medidas b{color:#244634}
+.painel{background:#fff;border-radius:14px;padding:14px 16px}
+.painel h2{font-size:15px;margin:14px 0 6px}.painel h2:first-child{margin-top:0}
+.passo{opacity:.45;pointer-events:none}#passos.ativo .passo{opacity:1;pointer-events:auto}
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:6px;border:0;border-radius:999px;padding:10px 16px;font-size:14px;font-weight:600;cursor:pointer;background:#244634;color:#fff;text-decoration:none}
+.btn.sec{background:#fff;color:#244634;box-shadow:inset 0 0 0 2px #244634}
+.btn.peq{padding:7px 12px;font-size:13px}
+.linha{display:flex;gap:6px;flex-wrap:wrap;align-items:center}
+label{font-size:13px;color:#3d4b43;display:block;margin:6px 0 2px}
+input[type=range]{width:100%;accent-color:#244634}
+input[type=text],input[type=number],select{font:inherit;font-size:14px;padding:8px 10px;border:1.5px solid #cdd3cb;border-radius:10px;background:#fff}
+.arq{display:block;border:2px dashed #9fb0a3;border-radius:14px;padding:16px;text-align:center;cursor:pointer;background:#fbfaf7}
+.arq input{display:none}
+#msg{margin:10px 0 0;font-size:14px;padding:10px 12px;border-radius:10px;background:#eef1ec}
+#msg.ok{background:#e1ebe4}#msg.erro{background:#f7e0dc;color:#7d2418}#msg.aviso{background:#f6ebd2;color:#6d4c0e}
+#resultado{margin-top:18px;background:#fff;border-radius:14px;padding:16px}
+#resultado model-viewer{width:100%;height:420px;background:#f4f2ec;border-radius:12px}
+.ar-btn{position:absolute;left:50%;bottom:14px;transform:translateX(-50%);background:#244634;color:#fff;border:0;border-radius:999px;padding:13px 22px;font-size:16px;font-weight:600}
+.downloads{display:flex;flex-wrap:wrap;gap:8px;margin-top:12px}
+details.guia{background:#fff;border-radius:14px;padding:12px 16px;margin-bottom:14px}
+details.guia summary{font-weight:700;cursor:pointer}
+.guia ol{padding-left:20px;margin:8px 0}.guia li{margin:4px 0;font-size:14px}
+.guia table{border-collapse:collapse;font-size:14px;margin:6px 0}.guia td,.guia th{border-bottom:1px solid #e3e6e0;padding:6px 8px;text-align:left;vertical-align:top}
+small.dica{display:block;color:#6b776f;font-size:12px;margin-top:4px}
+</style>
+</head>
+<body>
+<header><strong>Estúdio 3D · Scan → “Ver no seu ambiente”</strong><a href="../">← Demonstração</a></header>
+<main>
+<h1>Transforme o scan do móvel em AR</h1>
+<p class="sub">Escaneie o produto com o celular, envie o arquivo aqui, ajuste e baixe os arquivos prontos para o botão “Ver no seu ambiente” (Android e iPhone).</p>
+
+<details class="guia">
+<summary>Como escanear o móvel (leia antes de fotografar)</summary>
+<table>
+<tr><th>Celular</th><th>App (gratuito para começar)</th><th>Arquivo que sai</th></tr>
+<tr><td>Android</td><td>KIRI Engine, RealityScan ou Polycam (modo foto)</td><td>.glb</td></tr>
+<tr><td>iPhone</td><td>Polycam (modo foto ou “Object”), KIRI Engine ou RealityScan</td><td>.glb/.gltf, ou .obj + .mtl + imagens</td></tr>
+</table>
+<ol>
+<li><strong>Luz:</strong> ambiente bem claro e uniforme, sem sol direto nem sombra forte. Luz de dia nublado ou loja bem iluminada é o ideal.</li>
+<li><strong>Espaço:</strong> deixe o móvel solto, com 1 metro livre em volta. Chão liso e sem desenho ajuda.</li>
+<li><strong>Fotos:</strong> dê 3 voltas completas: uma na altura do móvel, uma mais alta olhando de cima e uma mais baixa. Uma foto a cada passo, de 60 a 150 fotos no total, sem tremer.</li>
+<li><strong>Enquadramento:</strong> o móvel inteiro sempre na foto, ocupando boa parte dela. Não mexa no móvel durante o scan.</li>
+<li><strong>Detalhes:</strong> faça algumas fotos de perto dos puxadores, do tecido e dos pés.</li>
+<li><strong>Difíceis:</strong> preto brilhante, vidro, espelho, cromado e tela vazada saem ruins. Se der, use uma luz mais suave e mais fotos. Às vezes o melhor é modelar essas partes em 3D.</li>
+<li><strong>Exportar:</strong> no app, exporte em <b>GLB</b> (ou OBJ com as imagens) e envie aqui.</li>
+</ol>
+</details>
+
+<div class="grid">
+<div>
+  <div id="view"></div>
+  <div class="medidas">Medidas atuais do scan: <span>Largura <b id="dim-l">–</b></span><span>Altura <b id="dim-a">–</b></span><span>Profundidade <b id="dim-p">–</b></span><span>Triângulos <b id="tris">–</b></span></div>
+</div>
+<div class="painel">
+  <h2>1. Arquivo do scan</h2>
+  <label class="arq">Escolher arquivo (.glb, .gltf ou .obj)<br><small class="dica">Para OBJ, selecione junto o .mtl e as imagens.</small><input id="arquivos" type="file" multiple accept=".glb,.gltf,.obj,.mtl,.bin,.png,.jpg,.jpeg,.webp"></label>
+  <label for="codigo">Nome do arquivo final (ex.: código do produto)</label><input id="codigo" type="text" placeholder="mesa-malaga" style="width:100%">
+  <div id="passos">
+  <div class="passo">
+  <h2>2. Deixar em pé</h2>
+  <div class="linha"><button class="btn sec peq" data-rot="x:90">Virar ↑ (X)</button><button class="btn sec peq" data-rot="x:-90">Virar ↓ (X)</button><button class="btn sec peq" data-rot="z:90">Deitar ← (Z)</button><button class="btn sec peq" data-rot="z:-90">Deitar → (Z)</button><button class="btn sec peq" data-rot="y:90">Girar 90° (Y)</button></div>
+  <h2>3. Limpar</h2>
+  <label for="corte">Cortar o chão que veio junto: <b id="corte-v">0 cm</b></label><input id="corte" type="range" min="0" max="15" step=".1" value="0">
+  <small class="dica">A faixa vermelha mostra até onde vai cortar. Corte só o chão, sem pegar os pés do móvel.</small>
+  <div class="linha" style="margin-top:6px"><button class="btn sec peq" id="aplicar-corte">Cortar chão</button><button class="btn sec peq" id="limpar">Remover pedaços soltos</button></div>
+  <h2>4. Medida real</h2>
+  <div class="linha"><select id="eixo"><option value="a">Altura</option><option value="l">Largura</option><option value="p">Profundidade</option></select><input id="medida" type="text" inputmode="decimal" placeholder="cm" style="width:90px"><button class="btn peq" id="aplicar-medida">Aplicar</button></div>
+  <small class="dica">Use a medida da ficha do produto. As outras medidas acompanham na mesma proporção, então confira se elas batem com a ficha.</small>
+  <h2>5. Deixar leve para o celular</h2>
+  <label for="alvo">Triângulos (no máximo)</label><select id="alvo"><option value="60000">60 mil (bem leve)</option><option value="120000" selected>120 mil (recomendado)</option><option value="250000">250 mil (mais detalhe)</option></select>
+  <button class="btn sec peq" id="otimizar" style="margin-top:6px">Simplificar malha</button>
+  <label for="textura">Tamanho da textura</label><select id="textura"><option value="1024">1024 px (leve)</option><option value="2048" selected>2048 px (recomendado)</option><option value="4096">4096 px (máximo detalhe)</option></select>
+  <h2>6. Gerar</h2>
+  <button class="btn" id="gerar">Gerar arquivos de AR</button>
+  </div>
+  </div>
+  <p id="msg">Envie o arquivo do scan para começar.</p>
+</div>
+</div>
+
+<section id="resultado" hidden>
+  <h2 style="margin-top:0">Pronto para o “Ver no seu ambiente”</h2>
+  <model-viewer id="previa" ar ar-modes="webxr quick-look" ar-scale="fixed" camera-controls shadow-intensity="1" environment-image="neutral" alt="Prévia do scan">
+    <button slot="ar-button" class="ar-btn">Testar no meu ambiente</button>
+  </model-viewer>
+  <p class="sub" style="font-size:13px;margin:8px 0 0">No Android, o botão “Testar no meu ambiente” abre a câmera aqui mesmo. No iPhone, se não abrir por aqui, o teste fica para depois de publicar, direto na página do produto.</p>
+  <div class="downloads"><a class="btn" id="baixar-glb" href="#">Baixar .glb</a><a class="btn" id="baixar-usdz" href="#">Baixar .usdz</a></div>
+  <p class="sub" style="margin-top:12px">Depois de baixar, mande os dois arquivos para a GRAVV (ou coloque na pasta <code>estudio3d/ar</code>) com o nome da página do produto. O botão aparece na ficha na próxima publicação.</p>
+</section>
+</main>
+<script src="scanner.bundle.js"></script>
+</body>
+</html>
